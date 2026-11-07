@@ -1,7 +1,7 @@
 import argparse
 import sys
 
-# import your modules (i'm creating these files next)
+# Import modules
 from src.compression import huffman, jabberwocky
 from src.dp import hmm, edit_distance
 from src.graphs import lightbulb
@@ -21,6 +21,9 @@ def main():
     
     parser.add_argument("--output", required=False, 
                         help="Path to the output file (optional)")
+    
+    parser.add_argument("--codebook", required=False, 
+                        help="Path to the codebook (Huffman only)")
 
     args = parser.parse_args()
 
@@ -29,9 +32,9 @@ def main():
 
     if args.module == "compress":
         if args.action == "huffman_encode":
-            huffman.encode(args.input, args.output)
+            huffman.encode(args.input, args.output, args.codebook)
         elif args.action == "huffman_decode":
-            huffman.decode(args.input, args.output)
+            huffman.decode(args.input, args.output, args.codebook)
         elif args.action == "jabber_encode":
             jabberwocky.jabber(args.input, args.output)
         elif args.action == "wocky_decode":
